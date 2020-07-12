@@ -148,6 +148,14 @@ public class SystemAlertWindowPlugin extends Activity implements MethodCallHandl
                     result.success(false);
                 }
                 break;
+            case "openApp":
+                if (!call.hasArgument("package_name") || TextUtils.isEmpty(call.argument("package_name").toString())) {
+                    result.error("ERROR", "Empty or null package name", null);
+                } else {
+                    String packageName = call.argument("package_name").toString();
+                    result.success(openApp(packageName));
+                }
+                break;
             default:
                 result.notImplemented();
         }
