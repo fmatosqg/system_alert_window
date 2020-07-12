@@ -367,7 +367,7 @@ public class SystemAlertWindowPlugin extends Activity implements MethodCallHandl
         if (launchIntent != null) {
             // null pointer check in case package name was not found
             Log.e(TAG, "Launching activity");
-            mActivity.startActivity(launchIntent);
+            startActivity(launchIntent);
             Log.e(TAG, "Activity launched");
             return true;
         }
