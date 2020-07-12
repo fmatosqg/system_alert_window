@@ -347,10 +347,10 @@ public class SystemAlertWindowPlugin extends Activity implements MethodCallHandl
     }
 
     private boolean openApp(String packageName) {
-        Intent launchIntent = activity.getPackageManager().getLaunchIntentForPackage(packageName);
+        Intent launchIntent = mActivity.getPackageManager().getLaunchIntentForPackage(packageName);
         if (launchIntent != null) {
             // null pointer check in case package name was not found
-            activity.startActivity(launchIntent);
+            mActivity.startActivity(launchIntent);
             return true;
         }
         return false;
