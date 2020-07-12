@@ -359,7 +359,7 @@ public class SystemAlertWindowPlugin extends Activity implements MethodCallHandl
         // Intent launchIntent = mActivity.getPackageManager().getLaunchIntentForPackage(packageName);
         Intent launchIntent = null;
         try{
-            launchIntent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse("https://play.google.com/store/apps/details?id=" + packageName)));
+            launchIntent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse("https://play.google.com/store/apps/details?id=" + packageName));
         }catch (Exception ignored) {
             Log.e(TAG, "Launching app failed");
         }
