@@ -12,6 +12,7 @@ import android.os.Build;
 import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
+import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
