@@ -345,4 +345,14 @@ public class SystemAlertWindowPlugin extends Activity implements MethodCallHandl
             notificationManager = mContext.getSystemService(NotificationManager.class);
         }
     }
+
+    private boolean openApp(String packageName) {
+        Intent launchIntent = activity.getPackageManager().getLaunchIntentForPackage(packageName);
+        if (launchIntent != null) {
+            // null pointer check in case package name was not found
+            activity.startActivity(launchIntent);
+            return true;
+        }
+        return false;
+    }
 }
