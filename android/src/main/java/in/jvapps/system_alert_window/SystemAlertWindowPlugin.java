@@ -64,7 +64,6 @@ public class SystemAlertWindowPlugin extends Activity implements MethodCallHandl
     }
 
     private SystemAlertWindowPlugin(Context context, Activity activity, MethodChannel newMethodChannel) {
-        isEnabled = true;
         this.mContext = context;
         mActivity = activity;
         methodChannel = newMethodChannel;
