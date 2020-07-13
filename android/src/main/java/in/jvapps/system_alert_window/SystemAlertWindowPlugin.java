@@ -42,6 +42,7 @@ import static in.jvapps.system_alert_window.utils.Constants.INTENT_EXTRA_PARAMS_
 
 public class SystemAlertWindowPlugin extends Activity implements MethodCallHandler {
 
+    private static boolean isEnabled = false;
     private Context mContext;
     @SuppressLint("StaticFieldLeak")
     private static Activity mActivity;
@@ -63,6 +64,7 @@ public class SystemAlertWindowPlugin extends Activity implements MethodCallHandl
     }
 
     private SystemAlertWindowPlugin(Context context, Activity activity, MethodChannel newMethodChannel) {
+        isEnabled = true;
         this.mContext = context;
         mActivity = activity;
         methodChannel = newMethodChannel;
@@ -147,14 +149,6 @@ public class SystemAlertWindowPlugin extends Activity implements MethodCallHandl
                 } catch (Exception ex) {
                     Log.e(TAG, "Exception in registerOnClickHandler " + ex.toString());
                     result.success(false);
-                }
-                break;
-            case "openApp":
-                if (!call.hasArgument("package_name") || TextUtils.isEmpty(call.argument("package_name").toString())) {
-                    result.error("ERROR", "Empty or null package name", null);
-                } else {
-                    String packageName = call.argument("package_name").toString();
-                    result.success(openApp(packageName));
                 }
                 break;
             default:
@@ -355,14 +349,7 @@ public class SystemAlertWindowPlugin extends Activity implements MethodCallHandl
         }
     }
 
-    private boolean openApp(String packageName) {
-        Intent launchIntent = mActivity.getPackageManager().getLaunchIntentForPackage(packageName);
-
-        if (launchIntent != null) {
-            // null pointer check in case package name was not found
-            mActivity.startActivity(launchIntent);
-            return true;
-        }
-        return false;
-    }
+    public static void stopActivity(){
+        isEnabled = false;
+      }
 }
