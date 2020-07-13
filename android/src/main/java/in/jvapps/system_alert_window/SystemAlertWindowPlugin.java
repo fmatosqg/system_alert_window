@@ -42,7 +42,7 @@ import static in.jvapps.system_alert_window.utils.Constants.INTENT_EXTRA_PARAMS_
 
 public class SystemAlertWindowPlugin extends Activity implements MethodCallHandler {
 
-    private static boolean isEnabled = false;
+    public static boolean isEnabled = false;
     private Context mContext;
     @SuppressLint("StaticFieldLeak")
     private static Activity mActivity;
@@ -73,6 +73,8 @@ public class SystemAlertWindowPlugin extends Activity implements MethodCallHandl
 
     @Override
     public void onMethodCall(MethodCall call, @NonNull Result result) {
+        if(!isEnabled)
+            result.success("No main activity detected");
         switch (call.method) {
             case "getPlatformVersion":
                 result.success("Android " + android.os.Build.VERSION.RELEASE);
