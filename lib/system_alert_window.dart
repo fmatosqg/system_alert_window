@@ -113,14 +113,6 @@ class SystemAlertWindow {
   static Future<bool> closeSystemWindow() async {
     return await _channel.invokeMethod('closeSystemWindow');
   }
-
-  static Future<bool> openApp(String packageName) async {
-    if (packageName.isEmpty) {
-      throw Exception('The package name can not be empty');
-    }
-    return await _channel
-        .invokeMethod('openApp', {'package_name': packageName});
-  }
 }
 
 void callbackDispatcher() {
