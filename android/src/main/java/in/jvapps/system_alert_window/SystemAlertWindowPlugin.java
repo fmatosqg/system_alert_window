@@ -45,6 +45,8 @@ public class SystemAlertWindowPlugin extends Activity implements MethodCallHandl
     private Context mContext;
     @SuppressLint("StaticFieldLeak")
     private static Activity mActivity;
+
+    private static Context staticContext;
     @SuppressLint("StaticFieldLeak")
     private static FlutterNativeView sBackgroundFlutterView;
     private static PluginRegistry.PluginRegistrantCallback sPluginRegistrantCallback;
@@ -64,6 +66,7 @@ public class SystemAlertWindowPlugin extends Activity implements MethodCallHandl
 
     private SystemAlertWindowPlugin(Context context, Activity activity, MethodChannel newMethodChannel) {
         this.mContext = context;
+        staticContext = context.getApplicationContext();
         mActivity = activity;
         methodChannel = newMethodChannel;
         methodChannel.setMethodCallHandler(this);
@@ -356,11 +359,12 @@ public class SystemAlertWindowPlugin extends Activity implements MethodCallHandl
     }
 
     private boolean openApp(String packageName) {
-        Intent launchIntent = mActivity.getPackageManager().getLaunchIntentForPackage(packageName);
+        Intent launchIntent = staticContext.getPackageManager().getLaunchIntentForPackage(packageName);
 
         if (launchIntent != null) {
             // null pointer check in case package name was not found
-            mActivity.startActivity(launchIntent);
+            staticContext.startActivity(launchIntent);
+
             return true;
         }
         return false;
